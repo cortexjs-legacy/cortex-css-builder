@@ -6,14 +6,15 @@
   "scripts": {
     "test": "make test"
   },
+  "bin": {
+    "cortex-css-builder": "index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/supersheep/cortex-css-builder.git"
   },
-  "keywords": [
-    "cortex-css-builder"
-  ],
-  "engines": { 
+  "keywords": [],
+  "engines": {
     "node": ">=0.11.0"
   },
   "author": "supersheep",
@@ -22,7 +23,19 @@
     "url": "https://github.com/supersheep/cortex-css-builder/issues"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "chai": "*",
+    "fs-extra": "^0.9.1",
+    "mkdirp": "^0.5.0",
+    "mocha": "*"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "cortex-playground": "^0.1.9",
+    "cortex-profile": "^2.0.1",
+    "cortex-shrinkwrap": "^1.1.0",
+    "mocha": "^1.20.1",
+    "read-cortex-json": "^2.1.1",
+    "semver": "^2.3.0",
+    "underscore": "^1.6.0"
   }
 }

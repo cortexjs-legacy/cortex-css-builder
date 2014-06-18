@@ -12,7 +12,8 @@
 *.vi
 *~
 *.sass-cache
-
+neurons
+test/fixtures
 # OS or Editor folders
 .DS_Store
 ._*
