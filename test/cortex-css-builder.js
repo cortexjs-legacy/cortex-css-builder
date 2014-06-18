@@ -37,7 +37,7 @@ describe('get css dependencies', function () {
       cwd: path.join(__dirname, 'fixtures'),
       cache_root: cache_root
     }, function (err, result) {
-      console.log(result);
+      console.log(JSON.stringify(result, null, 2));
       expect(result).to.deep.equal();
     });
   });

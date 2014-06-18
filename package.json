@@ -31,7 +31,6 @@
   "dependencies": {
     "async": "^0.9.0",
     "cortex-playground": "^0.1.9",
-    "cortex-profile": "^2.0.1",
     "cortex-shrinkwrap": "^1.1.0",
     "mocha": "^1.20.1",
     "read-cortex-json": "^2.1.1",

@@ -11,8 +11,10 @@ var util = require('util');
 
 var builder = new events.EventEmitter();
 
-builder.validate = function (modules, callback) {
+builder.pickVersion = function (modules, callback) {
   var self = this;
+  var conflict = false;
+  var mods = {};
   for (var name in modules) {
     var module = modules[name];
     var versions = Object.keys(module);
@@ -26,7 +28,7 @@ builder.validate = function (modules, callback) {
         var parsed = semver.parse(version_to_choose);
         if (parsed.major == v.major) {
           // error
-          callback();
+          conflict = true;
         } else if (parsed.minor == v.minor) {
           // warn
           self.emit("warn", util("multi minor version %s@%s <-> %s@%s", name, version, name, version_to_choose_raw));
@@ -36,10 +38,19 @@ builder.validate = function (modules, callback) {
         }
       }
     });
+
+    mods[name] = modules[name][version_to_choose];
+    mods[name].version = version_to_choose;
+  }
+  if (conflict) {
+    callback("multi major version!");
+  } else {
+    callback(null, mods);
   }
 }
 
 builder.get = function (options, callback) {
+  var self = this;
   var cwd = options.cwd || process.cwd();
   var cache_root = options.cache_root
 
@@ -61,8 +72,17 @@ builder.get = function (options, callback) {
         if (err) {
           return callback(err);
         }
-        callback(null, modules);
+
+
+        self.pickVersion(modules, function (err, mods) {
+          if (err) {
+            return callback(err);
+          }
+          callback(null, mods);
+        });
       });
     });
   });
 }
+
+module.exports = builder;
